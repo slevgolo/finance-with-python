@@ -1,9 +1,9 @@
 # First tests: implement and further develop source code from https://www.youtube.com/watch?v=r8pU-8l1KPU
-import yfinance as yf
-import numpy as np
 import datetime
-import pandas as pd
-import matplotlib.pyplot as plt
+
+import numpy as np
+import yfinance as yf
+
 from classes.Indicators import Indicators
 from classes.Strategies import Strategies
 
@@ -79,7 +79,8 @@ def foo(TICKER, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_B
 
 profits, means, overalls = [], [], []
 for ticker in tickers:
-    profit, mean, overall = foo(ticker, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_BOUND, MACD_BOUND)
+    profit, mean, overall = foo(ticker, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_BOUND,
+                                MACD_BOUND)
     profits.append(profit)
     means.append(mean)
     overalls.append(overall)
