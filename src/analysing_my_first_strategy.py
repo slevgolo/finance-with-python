@@ -65,7 +65,7 @@ def foo(TICKER, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_B
     # sell after buy
     actuals = strategy.get_actual_dates(dates)
 
-    profits = strategy.profit_calc(df, dates)
+    profits = strategy.profit_calc(df, actuals)
     print(f'Mean profit per trade: {profits.mean()}')
     print(f'Overall profit: {(1 + profits).cumprod()[-1]}')
     return profits, profits.mean(), (1 + profits).cumprod()[-1]
@@ -77,12 +77,12 @@ def foo(TICKER, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_B
 # plt.scatter(actuals.sell_dates, df.Open[actuals.sell_dates], marker='v', color='r', s=200)
 # plt.show()
 
-profitss, meanss, overallss = [], [], []
+profits, means, overalls = [], [], []
 for ticker in tickers:
-    a, b, c = foo(ticker, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_BOUND, MACD_BOUND)
-    profitss.append(a)
-    meanss.append(b)
-    overallss.append(c)
+    profit, mean, overall = foo(ticker, LAGS, WINDOW, SMOOTH_WINDOW, K_LINE_BOUNDS, D_LINE_BOUNDS, RSI_BOUND, MACD_BOUND)
+    profits.append(profit)
+    means.append(mean)
+    overalls.append(overall)
 
-print("fin")
-
+print(f'Mean profit over all ticker profit means: {np.array(means).mean()}')
+print(f'Mean overall profit over all tickers: {np.array(overalls).mean()}')
